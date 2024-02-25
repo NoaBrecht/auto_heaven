@@ -3,7 +3,7 @@ export interface Brand{
     name:string;
     Country:string;
     Logo:string;
-    foundedYear: string;
+    foundedYear: number;
     website:string
 }
 export interface Car {
