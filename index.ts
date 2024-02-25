@@ -1,7 +1,9 @@
 import * as readline from 'readline-sync';
+import { Car } from './interfaces';
+let data = fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json').then(response => response.json());
 
-console.log("Welcome to the JSON data viewer!")
-let choices : string[] = ["View all data", "Filter by ID"];
-
-let index : number = readline.keyInSelect(choices, "Please enter your choice:");
-console.log(`You chose ${choices[index]}.`);
+data.then(data=> {
+    let array:Car[] = data;
+})
+const model: Car[] = Array;
+console.log(model)
