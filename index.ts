@@ -9,7 +9,7 @@ async function main() {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
         const cars: Car[] = await response.json();
         if (index == 0) {
-            cars.forEach(car => console.log(`- ${car.name} (${car.id})`));
+            cars.forEach(car => console.log(`- ${car.brand.name} - ${car.name} (${car.id})`));
         }
         else if (index == 1) {
             let Car_ID: string = readline.question("Please enter the ID you want to filter by (CAR-000): ");
