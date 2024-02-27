@@ -1,6 +1,5 @@
 import * as readline from 'readline-sync';
 import { Car } from './interfaces';
-let cars: Car[] = [];
 console.log("Welcome to the JSON data viewer!")
 let choices: string[] = ["View all data", "Filter by ID"];
 let ID_found: boolean;
