@@ -7,6 +7,8 @@ let index: number = readline.keyInSelect(choices, "Please enter your choice:");
 async function main() {
     try {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
+        if (response.status === 404) throw new Error('Not found');
+        if (response.status === 500) throw new Error('Internal server error');
         const cars: Car[] = await response.json();
         if (index == 0) {
             cars.forEach(car => console.log(`- ${car.brand.name} - ${car.name} (${car.id})`));
