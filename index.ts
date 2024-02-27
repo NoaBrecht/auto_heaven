@@ -28,3 +28,5 @@ fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.j
         }
     })
     .catch(error => console.error('Error:', error));
+
+export {}
