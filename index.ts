@@ -1,10 +1,10 @@
 import * as readline from 'readline-sync';
 import { Car } from './interfaces';
-console.log("Welcome to the JSON data viewer!")
-let choices: string[] = ["View all data", "Filter by ID"];
-let ID_found: boolean;
-let index: number = readline.keyInSelect(choices, "Please enter your choice:");
 async function main() {
+    console.log("Welcome to the JSON data viewer!")
+    let ID_found: boolean;
+    let choices: string[] = ["View all data", "Filter by ID"];
+    let index: number = readline.keyInSelect(choices, "Please enter your choice:");
     try {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
         if (response.status === 404) throw new Error('Not found');
