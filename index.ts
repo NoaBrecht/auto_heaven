@@ -1,8 +1,8 @@
 import * as readline from 'readline-sync';
 import { Car } from './interfaces';
+let ID_found: boolean;
 async function main() {
     console.log("Welcome to the JSON data viewer!")
-    let ID_found: boolean;
     let choices: string[] = ["View all data", "Filter by ID"];
     let index: number = readline.keyInSelect(choices, "Please enter your choice:");
     try {
