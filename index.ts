@@ -15,13 +15,11 @@ async function main() {
         }
         else if (index == 1) {
             let Car_ID: string = readline.question("Please enter the ID you want to filter by (CAR-000): ");
-            cars.forEach(car => {
-                if (car.id == Car_ID) {
-                    console.log(car);
-                    ID_found = true;
-                }
-            });
-            if (!ID_found) {
+            let carsearch: Car | undefined = cars.find((car) => car.id === Car_ID);
+            if (carsearch != undefined) {
+                console.log(carsearch)
+            }
+            else {
                 console.log(`Er is geen model gevonden met ID: ${Car_ID}`)
             }
         }
@@ -30,4 +28,4 @@ async function main() {
     }
 }
 main();
-export {}
+export { }
