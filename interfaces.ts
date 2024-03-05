@@ -1,7 +1,7 @@
 export interface Brand{
     id:string;
     name:string;
-    Country:string;
+    country:string;
     logo:string;
     foundedYear: number;
     website:string
