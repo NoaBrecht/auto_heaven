@@ -2,7 +2,7 @@ export interface Brand{
     id:string;
     name:string;
     Country:string;
-    Logo:string;
+    logo:string;
     foundedYear: number;
     website:string
 }
