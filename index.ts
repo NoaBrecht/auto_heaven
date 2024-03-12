@@ -20,7 +20,7 @@ app.get('/models', async (req, res) => {
         if (response.status === 500) throw new Error('Internal server error');
         
         let cars: Car[] = await response.json();
-        let filteredModes: Car[] = cars.filter((car)=>car.name.startsWith(q));
+        let filteredModes: Car[] = cars.filter((car)=>car.name.toLowerCase().startsWith(q.toLowerCase()));
         res.render('models',
         {
             title: "Models",
