@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+    <%- include('partials/nav') %>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Brand
+                    </th>
+                    <th scope="col" class="py-3">
+                        Country
+                    </th>
+                    <th scope="col" class="py-3">
+                        Year founded
+                    </th>
+                    <th scope="col" class="py-3">
+                        Website
+                    </th>
+                    <th scope="col" class="py-3">
+                        ID
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let brand of brands) { %>
+                    <tr>
+                        <th scope="row"
+                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                            <img class="w-20 h-auto max-w-xs " src='<%= brand.logo %>'
+                                alt='<%= brand.name%> logo'>
+                            <div class="ps-3">
+                                <div class="text-base font-semibold">
+                                    <%= brand.name %>
+                                </div>
+                            </div>
+                        </th>
+                        <td>
+                            <%= brand.country %>
+                        </td>
+                        <td>
+                            <%= brand.foundedYear %>
+                        </td>
+
+                        <td><a target="_blank" href='https://<%= brand.website %>'
+                                class="font-medium text-purple-600 dark:text-purple-500 hover:underline">
+                                <%= brand.website %>
+                            </a></td>
+                        <td>
+                            <%= brand.id %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        <%- include('partials/footer') %>
