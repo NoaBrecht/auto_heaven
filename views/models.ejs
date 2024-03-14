@@ -12,8 +12,8 @@
                 </div>
                 <form action="/models" method="get">
                     <input type="text" id="q" name="q" value="<%= q %>"
-                    class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
-                    placeholder="Search a model">
+                        class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+                        placeholder="Search a model">
                 </form>
 
             </div>
@@ -22,19 +22,89 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        MODEL
+                        <a href="?q=<%= q %>&sortField=model&sortDirection=<%=sortDirection === 'asc' && sortField !== 'model' ? 'asc' : 'desc' %>"
+                            class="flex items-center space-x-1">MODEL
+
+                            <% if (sortField==='model' && sortDirection==='desc' ) { %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 transform rotate-180"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } else{ %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } %>
+                        </a>
                     </th>
                     <th scope="col" class="py-3">
-                        DATE FIRST PRODUCED
+                        <a href="?q=<%= q %>&sortField=date&sortDirection=<%=sortDirection === 'asc' && sortField !== 'date' ? 'asc' : 'desc' %>"
+                            class="flex items-center space-x-1">
+                            DATE FIRST PRODUCED
+                            <% if (sortField==='date' && sortDirection==='desc' ) { %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 transform rotate-180"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } else{ %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } %>
+                        </a>
                     </th>
                     <th scope="col" class="py-3">
-                        TYPE
+                        <a href="?q=<%= q %>&sortField=type&sortDirection=<%=sortDirection === 'asc' && sortField !== 'type' ? 'asc' : 'desc' %>"
+                            class="flex items-center space-x-1"> TYPE
+                            <% if (sortField==='type' && sortDirection==='desc' ) { %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 transform rotate-180"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } else{ %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } %>
+                        </a>
                     </th>
                     <th scope="col" class="py-3">
                         FEATURES
                     </th>
                     <th scope="col" class="py-3">
-                        CONCEPT
+                        <a href="?q=<%= q %>&sortField=concept&sortDirection=<%=sortDirection === 'asc' && sortField !== 'concept' ? 'asc' : 'desc' %>"
+                            class="flex items-center space-x-1"> CONCEPT
+                            <% if (sortField==='concept' && sortDirection==='desc' ) { %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 transform rotate-180"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } else{ %>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            <% } %>
+                        </a>
                     </th>
                     <th scope="col" class="py-3">
                         ACTIONS
@@ -72,7 +142,7 @@
                                 <h1>
                                     <%= feature %>
                                 </h1>
-                                <%} %>
+                            <% } %>
                         </td>
                         <td>
                             <% if (car.concept_car){ %>
@@ -80,19 +150,19 @@
                                     <input disabled checked id="checkbox-table-search-1" type="checkbox"
                                         class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
-                                <% } else { %>
-                                    <div class="flex items-center">
-                                        <input disabled id="checkbox-table-search-1" type="checkbox"
-                                            class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    </div>
-                                    <% } %>
+                            <% } else { %>
+                                <div class="flex items-center">
+                                    <input disabled id="checkbox-table-search-1" type="checkbox"
+                                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                            <% } %>
                         </td>
                         <td><a target="_blank" href='model/<%=car.id%>'
                                 class="font-medium text-purple-600 dark:text-purple-500 hover:underline">
                                 View
                             </a></td>
                     </tr>
-                    <% } %>
+                <% } %>
             </tbody>
-        </table>
-        <%- include('partials/footer') %>
+            </table>
+            <%- include('partials/footer') %>
