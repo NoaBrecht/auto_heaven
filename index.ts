@@ -1,6 +1,7 @@
 import express from "express";
 import { Car } from './interfaces';
 import { Brand } from './interfaces';
+import { error } from "console";
 const app = express();
 
 app.set('view engine', 'ejs'); // EJS als view engine
@@ -54,6 +55,7 @@ app.get('/brands', async (req, res) => {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/brands.json');
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
+        if (response.status === 400) throw new Error('Bad request');
         let brands: Brand[] = await response.json();
         res.render('brands',
             {
@@ -71,12 +73,14 @@ app.get('/brand/:brandID', async (req, res) => {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/brands.json');
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
+        let errorcode = response.status;
         let brands: Brand[] = await response.json();
         let filteredBrands: Brand[] = brands.filter((brand) => brand.id === ID);
+        let brand: Brand | undefined = filteredBrands[0];
         res.render('brand',
             {
-                title: "",
-                brands: filteredBrands
+                title: brand?.name || "Merk niet gevonden",
+                brand: brand
             });
     } catch (error) {
         console.error('Error:', error);
@@ -89,12 +93,16 @@ app.get('/model/:modelID', async (req, res) => {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
+        let errorcode = response.status;
+
         let cars: Car[] = await response.json();
         let filteredModel: Car[] = cars.filter((model) => model.id === ID);
+        let model: Car | undefined = filteredModel[0];
+
         res.render('model',
             {
-                title: "",
-                models: filteredModel
+                title: model?.name || "Model niet gevonden",
+                model: model
             });
     } catch (error) {
         console.error('Error:', error);
