@@ -7,16 +7,23 @@ const app = express();
 app.set('view engine', 'ejs'); // EJS als view engine
 app.set('port', 3000);
 
+
+app.use((req, res, next) => {
+    res.locals.websitename = "test";
+    next();
+});
+
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
+});
+
 app.get('/', (req, res) => {
     res.render('index',
         {
             title: "Home"
         });
 })
-app.use((req, res, next) => {
-    res.locals.websitename = "test";
-    next();
-});
 app.get('/models', async (req, res) => {
     let q: string = (typeof req.query.q === "string" ? req.query.q : "");
     const sortField = typeof req.query.sortField === "string" ? req.query.sortField : "name";
