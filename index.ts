@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
             title: "Home"
         });
 })
+app.use((req, res, next) => {
+    res.locals.websitename = "test";
+    next();
+});
 app.get('/models', async (req, res) => {
     let q: string = (typeof req.query.q === "string" ? req.query.q : "");
     const sortField = typeof req.query.sortField === "string" ? req.query.sortField : "name";
@@ -98,6 +102,8 @@ app.get('/model/:modelID', async (req, res) => {
         let cars: Car[] = await response.json();
         let filteredModel: Car[] = cars.filter((model) => model.id === ID);
         let model: Car | undefined = filteredModel[0];
+
+        // console.log(ID);
 
         res.render('model',
             {
