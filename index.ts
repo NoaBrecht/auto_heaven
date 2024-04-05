@@ -6,10 +6,11 @@ const app = express();
 
 app.set('view engine', 'ejs'); // EJS als view engine
 app.set('port', 3000);
+app.use(express.static("public"));
 
 
 app.use((req, res, next) => {
-    res.locals.websitename = "test";
+    res.locals.websitename = "Royal Auto Heaven";
     next();
 });
 

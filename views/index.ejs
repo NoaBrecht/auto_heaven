@@ -1,3 +1,12 @@
 <%- include('partials/header') %>
-<%- include('partials/nav') %>
-<%- include('partials/footer') %>
+    <%- include('partials/nav') %>
+        <div id="welcome-section" class=" flex flex-col">
+            <h1 class="text-4xl font-bold mb-4 text-blue-900">Welcome to <span class="text-5xl text-purple-700">
+                    <%= websitename %>
+                </span>!</h1>
+            <p class="text-lg text-gray-600 mb-8">Discover amazing content and services.</p>
+            <a href="/models"
+                class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors duration-300 ease-in-out">Get
+                Started</a>
+        </div>
+        <%- include('partials/footer') %>
