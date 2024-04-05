@@ -133,7 +133,7 @@
                             </div>
                         </th>
                         <td>
-                            <%= car.date_first_produced %>
+                            <%= (new Date(car.date_first_produced)).toLocaleDateString() %>
                         </td>
                         <td>
                             <%= car.type.toUpperCase()%>

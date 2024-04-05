@@ -4,7 +4,7 @@ import { Brand } from './interfaces';
 import { error } from "console";
 const app = express();
 
-app.set('view engine', 'ejs'); // EJS als view engine
+app.set('view engine', 'ejs');
 app.set('port', 3000);
 app.use(express.static("public"));
 app.use((req, res, next) => {
