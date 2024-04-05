@@ -7,18 +7,11 @@ const app = express();
 app.set('view engine', 'ejs'); // EJS als view engine
 app.set('port', 3000);
 app.use(express.static("public"));
-
-
 app.use((req, res, next) => {
-    res.locals.websitename = "Royal Auto Heaven";
-    next();
-});
-
-app.use((req, res, next) => {
+    res.locals.websitename = "Auto Haven";
     console.log(`${req.method} ${req.path}`);
     next();
 });
-
 app.get('/', (req, res) => {
     res.render('index',
         {
@@ -33,9 +26,8 @@ app.get('/models', async (req, res) => {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
         if (response.status === 404) throw new Error('Not found');
         if (response.status === 500) throw new Error('Internal server error');
-
         let cars: Car[] = await response.json();
-        let filteredModels: Car[] = cars.filter((car) => car.name.toLowerCase().startsWith(q.toLowerCase()));
+        let filteredModels: Car[] = cars.filter((car) => car.name.toLowerCase().startsWith(q.toLowerCase()) || car.brand.name.toLowerCase().startsWith(q.toLowerCase()));
         let sortedModels = [...filteredModels].sort((a, b) => {
             if (sortField === "model") {
                 return sortDirection === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
@@ -80,7 +72,6 @@ app.get('/brands', async (req, res) => {
 })
 app.get('/brand/:brandID', async (req, res) => {
     let ID = req.params.brandID;
-
     try {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/brands.json');
         if (response.status === 404) throw new Error('Not found');
@@ -100,7 +91,6 @@ app.get('/brand/:brandID', async (req, res) => {
 })
 app.get('/model/:modelID', async (req, res) => {
     let ID = req.params.modelID;
-
     try {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
         if (response.status === 404) throw new Error('Not found');
@@ -110,9 +100,6 @@ app.get('/model/:modelID', async (req, res) => {
         let cars: Car[] = await response.json();
         let filteredModel: Car[] = cars.filter((model) => model.id === ID);
         let model: Car | undefined = filteredModel[0];
-
-        // console.log(ID);
-
         res.render('model',
             {
                 title: model?.name || "Model niet gevonden",
@@ -122,5 +109,4 @@ app.get('/model/:modelID', async (req, res) => {
         console.error('Error:', error);
     }
 })
-
 app.listen(app.get('port'), () => console.log('[server] http://localhost:' + app.get('port')));

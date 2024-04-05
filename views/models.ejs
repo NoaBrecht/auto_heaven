@@ -13,7 +13,7 @@
                 <form action="/models" method="get">
                     <input type="text" id="q" name="q" value="<%= q %>"
                         class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
-                        placeholder="Search a model">
+                        placeholder="Search a model by name or brand">
                     <input type="hidden" name="sortField" id="sortField" value="<%= sortField %>">
                     <input type="hidden" name="sortDirection" id="sortDirection" value="<%= sortDirection %>">
 
@@ -142,7 +142,7 @@
                         <td>
                             <% for(let feature of car.features) { %>
                                 <p
-                                    class="m-2 bg-blue-100 text-blue-800 font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 ">
+                                    class="m-2 bg-purple-100 text-gray-100 font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 ">
                                     <%= feature %>
                                 </p>
                                 <% } %>
