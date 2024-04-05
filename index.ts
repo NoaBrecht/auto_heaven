@@ -71,7 +71,7 @@ app.get('/brands', async (req, res) => {
     }
 })
 app.get('/brand/:brandID', async (req, res) => {
-    let ID = req.params.brandID;
+    let ID = req.params.brandID.toUpperCase();
     try {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/brands.json');
         if (response.status === 404) throw new Error('Not found');
@@ -90,7 +90,7 @@ app.get('/brand/:brandID', async (req, res) => {
     }
 })
 app.get('/model/:modelID', async (req, res) => {
-    let ID = req.params.modelID;
+    let ID = req.params.modelID.toUpperCase();
     try {
         const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
         if (response.status === 404) throw new Error('Not found');
