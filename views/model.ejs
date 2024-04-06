@@ -1,6 +1,5 @@
 <%- include('partials/header') %>
     <%- include('partials/nav') %>
-
         <div
             class="max-w-sm bg-white border items-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="<%= model.image_url %>">
@@ -11,6 +10,9 @@
                     <%= model.brand.name%>
                         <%= model.name%>
                 </h5>
+                <p class="mb-3 font-normal text-sm text-gray-700 dark:text-gray-400">
+                    ID: <%= model.id %>
+                </p>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     <%= model.description %>
                 </p>
@@ -24,18 +26,16 @@
                     Type: <%= model.type %>
                 </p>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                <div class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     Features:
+                </p>
+                <div class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     <% for (let feature of model.features) { %>
-                        <p class="m-2">
                         <p
-                            class="m-2 bg-blue-100 text-blue-800 font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 ">
+                            class="m-2 <% if (model.id==='CAR-007' ) { %>bg-midnightblue <% }else {%>bg-purple-100<%}%> text-gray-100 font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 ">
                             <%= feature %>
-                        </p>
                         </p>
                         <% } %>
                 </div>
-                </p>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     Date First Produced: <%= model.date_first_produced %>
                 </p>
@@ -50,6 +50,12 @@
                                 d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
                 </a>
+                <% if (model.id==='CAR-007' ) { %>
+                    <!-- Easter egg for James Bond reference -->
+                    <div class="mt-5 p-3 bg-gray-900 text-white rounded-md">
+                        <p class="font-bold">👨🏻‍💼Shaken, not stirred. You've found the secret agent!</p>
+                    </div>
+                    <% } %>
             </div>
         </div>
 
