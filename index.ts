@@ -1,7 +1,6 @@
 import express from "express";
 import { Car } from './interfaces';
 import { Brand } from './interfaces';
-import { error } from "console";
 const app = express();
 
 app.set('view engine', 'ejs');
