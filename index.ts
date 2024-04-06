@@ -80,7 +80,6 @@ app.get('/brand/:brandID', async (req, res) => {
         let brands: Brand[] = await response.json();
         let filteredBrands: Brand[] = brands.filter((brand) => brand.id === ID);
         let brand: Brand | undefined = filteredBrands[0];
-        console.log(`${brand.name}`);
         res.render('brand',
             {
                 title: brand?.name || "Merk niet gevonden",
@@ -102,7 +101,6 @@ app.get('/model/:modelID', async (req, res) => {
         let cars: Car[] = await response.json();
         let filteredModel: Car[] = cars.filter((model) => model.id === ID);
         let model: Car | undefined = filteredModel[0];
-        console.log(`${model.name}`);
         res.render('model',
             {
                 title: model?.name || "Model niet gevonden",
