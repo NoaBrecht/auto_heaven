@@ -34,6 +34,8 @@ app.get('/models', async (req, res) => {
                 return sortDirection === "asc" ? new Date(a.date_first_produced).getTime() - new Date(b.date_first_produced).getTime() : new Date(b.date_first_produced).getTime() - new Date(a.date_first_produced).getTime();
             } else if (sortField === "type") {
                 return sortDirection === "asc" ? a.type.localeCompare(b.type) : b.type.localeCompare(a.type);
+                // } else if (sortField === "topspeed") {
+                //     return sortDirection === "asc" ? Number(b.topspeed) - Number(a.topspeed) : Number(a.topspeed) - Number(b.topspeed);
             } else if (sortField === "concept") {
                 return sortDirection === "asc" ? Number(b.concept_car) - Number(a.concept_car) : Number(a.concept_car) - Number(b.concept_car);
             } else {

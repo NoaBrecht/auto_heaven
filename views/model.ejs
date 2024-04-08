@@ -18,6 +18,8 @@
                 </p>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     Top Speed: <%= model.topspeed %> km/h
+                        <% const mph=model.topspeed/ 1.60934; %>
+                            (<%= mph.toFixed(0) %> mph)
                 </p>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     Concept Car: <%= model.concept_car %>
