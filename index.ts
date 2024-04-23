@@ -1,6 +1,7 @@
 import express from "express";
-import { Car } from './interfaces';
-import { Brand } from './interfaces';
+import dotenv from "dotenv";
+import { Car, Brand } from './interfaces';
+dotenv.config();
 const app = express();
 
 app.set('view engine', 'ejs');
