@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { Car, Brand } from './interfaces';
+import { connect, getBrand, getBrands, getModel, getModels } from "./database";
 dotenv.config();
 const app = express();
 
@@ -20,33 +21,20 @@ app.get('/', (req, res) => {
 })
 app.get('/models', async (req, res) => {
     let q: string = (typeof req.query.q === "string" ? req.query.q : "");
-    const sortField = typeof req.query.sortField === "string" ? req.query.sortField : "name";
-    const sortDirection = typeof req.query.sortDirection === "string" ? req.query.sortDirection : "asc";
+    let sortField = typeof req.query.sortField === "string" ? req.query.sortField : "id";
+    let sortDirection = typeof req.query.sortDirection === "string" ? req.query.sortDirection : "1";
+    if (sortField === "date") {
+        sortField = "date_first_produced";
+    }
+    if (sortField === "concept") {
+        sortField = "concept_car";
+    }
     try {
-        const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
-        if (response.status === 404) throw new Error('Not found');
-        if (response.status === 500) throw new Error('Internal server error');
-        let cars: Car[] = await response.json();
-        let filteredModels: Car[] = cars.filter((car) => car.name.toLowerCase().startsWith(q.toLowerCase()) || car.brand.name.toLowerCase().startsWith(q.toLowerCase()));
-        let sortedModels = [...filteredModels].sort((a, b) => {
-            if (sortField === "model") {
-                return sortDirection === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-            } else if (sortField === "date") {
-                return sortDirection === "asc" ? new Date(a.date_first_produced).getTime() - new Date(b.date_first_produced).getTime() : new Date(b.date_first_produced).getTime() - new Date(a.date_first_produced).getTime();
-            } else if (sortField === "type") {
-                return sortDirection === "asc" ? a.type.localeCompare(b.type) : b.type.localeCompare(a.type);
-                // } else if (sortField === "topspeed") {
-                //     return sortDirection === "asc" ? Number(b.topspeed) - Number(a.topspeed) : Number(a.topspeed) - Number(b.topspeed);
-            } else if (sortField === "concept") {
-                return sortDirection === "asc" ? Number(b.concept_car) - Number(a.concept_car) : Number(a.concept_car) - Number(b.concept_car);
-            } else {
-                return 0;
-            }
-        });
+        let cars = await getModels(q, sortField, -1);
         res.render('models',
             {
                 title: "Models",
-                cars: sortedModels,
+                cars: cars,
                 sortField: sortField,
                 sortDirection: sortDirection,
                 q: q
@@ -58,11 +46,7 @@ app.get('/models', async (req, res) => {
 })
 app.get('/brands', async (req, res) => {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/brands.json');
-        if (response.status === 404) throw new Error('Not found');
-        if (response.status === 500) throw new Error('Internal server error');
-        if (response.status === 400) throw new Error('Bad request');
-        let brands: Brand[] = await response.json();
+        let brands = await getBrands();
         res.render('brands',
             {
                 title: "Brands",
@@ -75,13 +59,7 @@ app.get('/brands', async (req, res) => {
 app.get('/brand/:brandID', async (req, res) => {
     let ID = req.params.brandID.toUpperCase();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/brands.json');
-        if (response.status === 404) throw new Error('Not found');
-        if (response.status === 500) throw new Error('Internal server error');
-        let errorcode = response.status;
-        let brands: Brand[] = await response.json();
-        let filteredBrands: Brand[] = brands.filter((brand) => brand.id === ID);
-        let brand: Brand | undefined = filteredBrands[0];
+        let brand = await getBrand(ID);
         res.render('brand',
             {
                 title: brand?.name || "Merk niet gevonden",
@@ -95,14 +73,7 @@ app.get('/model/:modelID', async (req, res) => {
 
     let ID = req.params.modelID.toUpperCase();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/NoaBrecht/project-web-files/main/cars.json');
-        if (response.status === 404) throw new Error('Not found');
-        if (response.status === 500) throw new Error('Internal server error');
-        let errorcode = response.status;
-
-        let cars: Car[] = await response.json();
-        let filteredModel: Car[] = cars.filter((model) => model.id === ID);
-        let model: Car | undefined = filteredModel[0];
+        let model = await getModel(ID);
         res.render('model',
             {
                 title: model?.name || "Model niet gevonden",
@@ -112,4 +83,7 @@ app.get('/model/:modelID', async (req, res) => {
         console.error('Error:', error);
     }
 })
-app.listen(app.get('port'), () => console.log('[server] http://localhost:' + app.get('port')));
+app.listen(app.get("port"), async () => {
+    await connect();
+    console.log("Server started on http://localhost:" + app.get('port'));
+});

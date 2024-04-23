@@ -1,4 +1,7 @@
+import { ObjectId } from "mongodb";
+
 export interface Brand {
+  _id?: ObjectId,
   id: string;
   name: string;
   country: string;
@@ -7,6 +10,7 @@ export interface Brand {
   website: string
 }
 export interface Car {
+  _id?: ObjectId,
   id: string;
   name: string;
   description: string;
