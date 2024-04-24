@@ -43,7 +43,7 @@ export async function getModels(_searchString: string, _sortField: string, _sort
         return await carCollection.find({}).sort({ [_sortField]: 1 }).toArray();
     }
     await carCollection.dropIndex("*")
-    await carCollection.createIndex({ name: "text", "brand.name": "text" }, { default_language: "en" });
+    await carCollection.createIndex({ name: "text", "brand.name": "text" });
     return await carCollection.find({ $text: { $search: _searchString } }).sort({ _sortField: 1 }).toArray();
 }
 export async function getModel(_modelId: string) {
