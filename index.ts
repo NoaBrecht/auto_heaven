@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import { Car, Brand } from './interfaces';
 import { connect, getBrand, getBrands, getModel, getModels } from "./database";
 dotenv.config();
 const app = express();
