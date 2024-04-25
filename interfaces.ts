@@ -22,4 +22,3 @@ export interface Car {
   features: string[];
   brand: Brand
 }
-export { }

@@ -57,7 +57,9 @@ export async function getBrands() {
 export async function getBrand(_brandId: string) {
     return await brandCollection.findOne({ id: _brandId });
 }
-
+export async function updateModel(id: string, model: Car) {
+    return await carCollection.updateOne({ id: id }, { $set: model });
+}
 export async function connect() {
     try {
         await client.connect();

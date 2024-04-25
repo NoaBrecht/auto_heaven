@@ -1,11 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
-import { connect, getBrand, getBrands, getModel, getModels } from "./database";
+import { connect, getBrand, getBrands, getModel, getModels, updateModel } from "./database";
+import { Car } from "./interfaces";
+import { cwd } from "process";
+
 dotenv.config();
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.use((req, res, next) => {
     res.locals.websitename = "Auto Haven";
@@ -81,6 +86,25 @@ app.get('/model/:modelID', async (req, res) => {
     } catch (error) {
         console.error('Error:', error);
     }
+})
+app.get('/model/:modelID/update', async (req, res) => {
+
+    let ID = req.params.modelID.toUpperCase();
+
+    let model = await getModel(ID);
+    const title = model?.name + " - update" || "Model niet gevonden";
+    res.render('model/update',
+        {
+            title: title,
+            model: model
+        });
+})
+app.post('/model/:modelID/update', async (req, res) => {
+    let ID = req.params.modelID.toUpperCase();
+    let model: Car = req.body;
+    console.log(model);
+    // await updateModel(ID, model);
+    // res.redirect('/models');
 })
 app.listen(app.get("port"), async () => {
     await connect();
