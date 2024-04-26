@@ -102,9 +102,11 @@ app.get('/model/:modelID/update', async (req, res) => {
 app.post('/model/:modelID/update', async (req, res) => {
     let ID = req.params.modelID.toUpperCase();
     let model: Car = req.body;
+    let concept_car: boolean = req.body.concept_car === "true";
     console.log(model);
-    // await updateModel(ID, model);
-    // res.redirect('/models');
+    model.concept_car = concept_car;
+    await updateModel(ID, model);
+    res.redirect('/models');
 })
 app.listen(app.get("port"), async () => {
     await connect();

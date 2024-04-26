@@ -16,35 +16,35 @@
                 <input type="text" id="description" name="description" required value="<%=model.description%>" />
                 <label for="topspeed" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Model
                     topspeed KM/H</label>
-                <input type="number" id="topspeed" name="topspeed" required value="<%=model.topspeed%>" />
-                <label for="concept_car" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Concept
-                    Car</label>
-                <input type="checkbox" name="concept_car" id="concept_car" value="<%=model.concept_car%>">
+                <input type="number" id="topspeed" name="topspeed" min="0" required value="<%=model.topspeed%>" />
+                <input type="hidden" name="concept_car" id="concept_car" value=<%=model.concept_car%>>
 
                 <label for="date_first_produced"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">date_first_produced</label>
                 <input type="date" name="date_first_produced" id="date_first_produced"
                     value="<%=model.date_first_produced%>">
-
-
-                <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Afbeelding
-                    URL</label>
-                <input type="text" id="image_url" name="image_url" required value="<%=model.image_url%>" />
+                <!-- <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Afbeelding
+                    URL</label> -->
+                <input type="hidden" id="image_url" name="image_url" required value="<%=model.image_url%>" />
                 <div class="mb-5"><label for="type"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                     <select id="type" name="type"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="SEDAN">SEDAN</option>
-                        <option value="STATION WAGON" <% if (model.type=='station wagon' ) { %> selected <%} %>>WAGON
+                        <option value="STATION WAGON" <% if (model.type=='station wagon' ) { %> selected <%} %>
+                                >WAGON
                         </option>
                         <option value="SUV" <% if (model.type=='SUV' ) { %> selected <%} %>>SUV</option>
-                        <option value="CONVERTIBLE" <% if (model.type=='CONVERTIBLE' ) { %> selected <%} %>>CONVERTIBLE
+                        <option value="CONVERTIBLE" <% if (model.type=='CONVERTIBLE' ) { %> selected <%} %>
+                                >CONVERTIBLE
                         </option>
                         <option value="COUPÉ" <% if (model.type=='COUPÉ' ) { %> selected <%} %>>COUPÉ</option>
-                        <option value="FASTBACK" <% if (model.type=='FASTBACK' ) { %> selected <%} %>>FASTBACK</option>
+                        <option value="FASTBACK" <% if (model.type=='FASTBACK' ) { %> selected <%} %>>FASTBACK
+                        </option>
                         <option value="HATCHBACK" <% if (model.type=='HATCHBACK' ) { %> selected <%} %>>HATCHBACK
                         </option>
-                        <option value="SUPERCAR" <% if (model.type=='SUPERCAR' ) { %> selected <%} %>>SUPERCAR</option>
+                        <option value="SUPERCAR" <% if (model.type=='SUPERCAR' ) { %> selected <%} %>>SUPERCAR
+                        </option>
                         <option value="TOURER" <% if (model.type=='TOURER' ) { %> selected <%} %>>TOURER</option>
 
                     </select>
