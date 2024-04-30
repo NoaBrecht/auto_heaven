@@ -1,4 +1,4 @@
-import { Collection, MongoClient } from "mongodb";
+import { Collection, MongoClient, SortDirection } from "mongodb";
 import { Brand, Car } from "./interfaces";
 import dotenv from "dotenv";
 
@@ -39,13 +39,16 @@ async function seed() {
     }
 }
 // Modelen
-export async function getModels(_searchString: string, _sortField: string, _sortDirection: number) {
+export async function getModels(_searchString: string, _sortField: string, _sortDirection: SortDirection) {
+
     if (_searchString === "") {
-        return await carCollection.find({}).sort({ [_sortField]: 1 }).toArray();
+        return await carCollection.find({}).sort({ [_sortField]: _sortDirection }).toArray();
     }
     await carCollection.dropIndex("*")
     await carCollection.createIndex({ name: "text", "brand.name": "text" });
-    return await carCollection.find({ $text: { $search: _searchString } }).sort({ _sortField: 1 }).toArray();
+    return await carCollection.find({ $text: { $search: _searchString } }).sort({ [_sortField]: _sortDirection }).toArray();
+
+
 }
 export async function getModel(_modelId: string) {
     return await carCollection.findOne({ id: _modelId });

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connect, getBrand, getBrands, getModel, getModels, updateModel } from "./database";
 import { Car } from "./interfaces";
 import { cwd } from "process";
+import { SortDirection } from "mongodb";
 
 dotenv.config();
 const app = express();
@@ -27,14 +28,23 @@ app.get('/models', async (req, res) => {
     let q: string = (typeof req.query.q === "string" ? req.query.q : "");
     let sortField = typeof req.query.sortField === "string" ? req.query.sortField : "id";
     let sortDirection = typeof req.query.sortDirection === "string" ? req.query.sortDirection : "1";
+    let direction: SortDirection = 1;
+    let field: string = "id";
+    if (sortDirection == "desc") {
+        direction = -1
+    }
     if (sortField === "date") {
-        sortField = "date_first_produced";
+        field = "date_first_produced";
     }
     if (sortField === "concept") {
-        sortField = "concept_car";
+        field = "concept_car";
     }
+    if (sortField === "model") {
+        field = "name"
+    }
+
     try {
-        let cars = await getModels(q, sortField, -1);
+        let cars = await getModels(q, field, direction);
         res.render('models',
             {
                 title: "Models",
