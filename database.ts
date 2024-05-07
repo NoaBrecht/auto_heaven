@@ -3,7 +3,7 @@ import { Brand, Car } from "./interfaces";
 import dotenv from "dotenv";
 
 dotenv.config();
-export const client = new MongoClient(process.env.MONGO_URI || 'mongodb://localhost:1');
+export const client = new MongoClient(process.env.MONGO_URI || 'mongodb://localhost:27017');
 export const carCollection: Collection<Car> = client.db("project").collection<Car>("cars");
 export const brandCollection: Collection<Brand> = client.db("project").collection<Brand>("brands");
 
