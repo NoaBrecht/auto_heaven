@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { connect, getBrand, getBrands, getModel, getModels, updateModel } from "./database";
 import { Car } from "./interfaces";
-import { cwd } from "process";
+import { cwd, title } from "process";
 import { SortDirection } from "mongodb";
 
 dotenv.config();
@@ -88,6 +88,13 @@ app.get('/model/:modelID', async (req, res) => {
     let ID = req.params.modelID.toUpperCase();
     try {
         let model = await getModel(ID);
+        if (!model) {
+            res.status(404).render("error", {
+                title: "Page not found",
+                message: "Page not found"
+            });
+            return;
+        }
         res.render('model',
             {
                 title: model?.name || "Model niet gevonden",
@@ -118,6 +125,12 @@ app.post('/model/:modelID/update', async (req, res) => {
     await updateModel(ID, model);
     res.redirect('/models');
 })
+app.use((req, res, next) => {
+    res.status(404).render("error", {
+        title: "Page not found",
+        message: "Page not found"
+    });
+});
 app.listen(app.get("port"), async () => {
     await connect();
     console.log("Server started on http://localhost:" + app.get('port'));
