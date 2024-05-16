@@ -1,11 +1,13 @@
 import { Collection, MongoClient, SortDirection } from "mongodb";
-import { Brand, Car } from "./interfaces";
+import { Brand, Car, User } from "./interfaces";
 import dotenv from "dotenv";
 
 dotenv.config();
 export const client = new MongoClient(process.env.MONGO_URI || 'mongodb://localhost:27017');
 export const carCollection: Collection<Car> = client.db("project").collection<Car>("cars");
 export const brandCollection: Collection<Brand> = client.db("project").collection<Brand>("brands");
+export const userCollection: Collection<User> = client.db("project").collection<User>("users");
+const saltRounds: number = 10;
 
 async function exit() {
     try {

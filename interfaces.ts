@@ -22,3 +22,9 @@ export interface Car {
   features: string[];
   brand: Brand
 }
+export interface User {
+  _id?: ObjectId,
+  email: string;
+  password?: string;
+  role: "ADMIN" | "USER";
+}
