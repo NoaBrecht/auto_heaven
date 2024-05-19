@@ -164,10 +164,13 @@
                                     class="block px-4 py-2 rounded-lg bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 hover:text-purple-700 dark:hover:text-purple-400 hover:underline">
                                     View
                                 </a>
-                                <a target="_blank" href='model/<%=car.id%>/update'
-                                    class="block px-4 py-2 rounded-lg bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 hover:text-purple-700 dark:hover:text-purple-400 hover:underline">
-                                    Edit
-                                </a>
+                                <% if (user.role==='ADMIN' ) {%>
+                                    <a target="_blank" href='model/<%=car.id%>/update'
+                                        class="block px-4 py-2 rounded-lg bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 hover:text-purple-700 dark:hover:text-purple-400 hover:underline">
+                                        Edit
+                                    </a>
+                                    <%} %>
+
                             </div>
                         </td>
                     </tr>
