@@ -98,6 +98,17 @@ export async function login(email: string, password: string) {
         throw new Error("User not found");
     }
 }
+export async function registerUser(email: string, password: string, role: "ADMIN" | "USER") {
+    password = await bcrypt.hash(password, saltRounds)
+    let existingUser: User | null = await userCollection.findOne<User>({ email: email })
+    if (existingUser) {
+        return { error: "User already exists" }
+    }
+    let user: User = {
+        email: email, password: password, role: role
+    }
+    return await userCollection.insertOne(user)
+}
 export async function connect() {
     try {
         await client.connect();

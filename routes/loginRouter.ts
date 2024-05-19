@@ -1,7 +1,7 @@
 import express from "express";
 import { User } from "../interfaces";
-import { secureMiddleware } from "./secureMiddleware";
 import { login } from "../database";
+import { secureMiddleware } from "../middleware/secureMiddleware";
 
 export function loginRouter() {
     const router = express.Router();
@@ -25,7 +25,6 @@ export function loginRouter() {
             res.redirect("/login");
         }
     });
-
     router.post("/logout", secureMiddleware, async (req, res) => {
         req.session.destroy((err) => {
             res.redirect("/login");

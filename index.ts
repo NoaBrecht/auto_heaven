@@ -4,7 +4,7 @@ import { connect } from "./database";
 import path from "path";
 import { homeRouter } from "./routes/homeRouter";
 import session from "./session";
-import { loginRouter } from "./middleware/loginRouter";
+import { loginRouter } from "./routes/loginRouter";
 
 dotenv.config();
 const app = express();
