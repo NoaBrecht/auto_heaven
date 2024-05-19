@@ -32,6 +32,25 @@ app.get('/register', async (req, res) => {
             title: "Register",
         });
 })
+app.post("/register", (req, res) => {
+    let fname: string = req.body.fname;
+    let confirm_password: string = req.body.confirm_password;
+    let email: string = req.body.email;
+    let password: string = req.body.password;
+
+    if (fname === "" || confirm_password === "" || email === "" || password === "") {
+        res.render("register", { error: "All fields are required" });
+    } else if (!email.includes("@")) {
+        res.render("register", { error: "Invalid email" });
+    } else if (password !== confirm_password) {
+        res.render("register", { error: "Passwords do not match" });
+    }
+    else {
+        console.log("Data is valid, saving user");
+
+        res.redirect("/success");
+    }
+});
 app.use((req, res, next) => {
     res.status(404).render("error", {
         title: "Page not found",
