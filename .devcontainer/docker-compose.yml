@@ -1,6 +1,4 @@
 version: '3.8'
-name: AutoHeaven
-
 services:
   app:
     name: app-AutoHeaven
