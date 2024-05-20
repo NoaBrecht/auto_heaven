@@ -1,10 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import { connect } from "./database";
+import { connect, registerUser } from "./database";
 import path from "path";
 import { homeRouter } from "./routes/homeRouter";
 import session from "./session";
 import { loginRouter } from "./routes/loginRouter";
+import { error } from "console";
 
 dotenv.config();
 const app = express();
@@ -30,15 +31,15 @@ app.get('/register', async (req, res) => {
     res.render('register',
         {
             title: "Register",
+            error: ""
         });
 })
 app.post("/register", (req, res) => {
-    let fname: string = req.body.fname;
     let confirm_password: string = req.body.confirm_password;
     let email: string = req.body.email;
     let password: string = req.body.password;
 
-    if (fname === "" || confirm_password === "" || email === "" || password === "") {
+    if (confirm_password === "" || email === "" || password === "") {
         res.render("register", { error: "All fields are required" });
     } else if (!email.includes("@")) {
         res.render("register", { error: "Invalid email" });
@@ -46,9 +47,10 @@ app.post("/register", (req, res) => {
         res.render("register", { error: "Passwords do not match" });
     }
     else {
-        console.log("Data is valid, saving user");
+        let role: "ADMIN" | "USER" = "USER";
+        registerUser(email, password, role);
 
-        res.redirect("/success");
+        res.redirect("/login");
     }
 });
 app.use((req, res, next) => {
