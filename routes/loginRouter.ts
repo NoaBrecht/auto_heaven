@@ -7,6 +7,11 @@ export function loginRouter() {
     const router = express.Router();
 
     router.get("/login", async (req, res) => {
+        let user = req.session.user;
+        if (user) {
+            res.redirect("/");
+            return;
+        }
         res.render('login',
             {
                 title: "Login",
@@ -14,6 +19,7 @@ export function loginRouter() {
     });
 
     router.post("/login", async (req, res) => {
+
         const email: string = req.body.email;
         const password: string = req.body.password;
         try {

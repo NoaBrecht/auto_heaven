@@ -28,6 +28,11 @@ app.use(homeRouter());
 app.use(loginRouter());
 
 app.get('/register', async (req, res) => {
+    let user = req.session.user;
+    if (user) {
+        res.redirect("/");
+        return;
+    }
     res.render('register',
         {
             title: "Register",
