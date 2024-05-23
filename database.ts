@@ -79,8 +79,8 @@ export async function getBrands() {
 export async function getBrand(_brandId: string) {
     return await brandCollection.findOne({ id: _brandId });
 }
-export async function updateModel(id: string, model: Car) {
-    return await carCollection.updateOne({ id: id }, { $set: model });
+export async function updateModel(id: string, name: string, description: string, topspeed: number, date_first_produced: Date, type: string) {
+    return await carCollection.updateOne({ id: id }, { $set: { name: name, description: description, topspeed: topspeed, date_first_produced: date_first_produced, type: type } });
 }
 //users
 export async function login(email: string, password: string) {

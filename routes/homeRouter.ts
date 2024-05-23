@@ -121,11 +121,13 @@ export function homeRouter() {
             return;
         }
         let ID = req.params.modelID.toUpperCase();
-        let model: Car = req.body;
-        let concept_car: boolean = req.body.concept_car === "true";
-        console.debug(model);
-        model.concept_car = concept_car;
-        await updateModel(ID, model);
+        let name: string = req.body.name;
+        let description: string = req.body.description;
+        let topspeed: number = parseInt(req.body.topspeed);
+        let date_first_produced: Date = req.body.date_first_produced;
+        console.log(date_first_produced);
+        let type = req.body.type;
+        await updateModel(ID, name, description, topspeed, date_first_produced, type);
         res.redirect('/models');
     })
 
